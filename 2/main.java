@@ -1,25 +1,36 @@
 import java.util.Scanner;
 import java.util.Arrays;
+import java.io.*;
+
 class main{
     
     public static void main(String[] args){
        
-        int[] dimensions = {0,0,0};
-        Scanner in = new Scanner(System.in);
+        String file = "input.txt";
+        String line = "";
+        int totalSurfaceArea = 0 ;
         
-        System.out.println("Enter package length: ");
-        dimensions[0] = in.nextInt();
-        System.out.println("Enter package width: ");
-        dimensions[1] = in.nextInt();
-        System.out.println("Enter package height: ");
-        dimensions[2] = in.nextInt();
-        
-        
-        System.out.println("Total required wrapping paper (sqft): "+surfaceArea(dimensions));
-        
+        try{
+            
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            
+            while ((line = bufferedReader.readLine()) != null){
+                String[] dimensionsString = new String[3];
+                dimensionsString = line.split("x");
+                int[] dimensions = new int[3];
+                for(int i = 0; i < dimensionsString.length; i++){
+                    dimensions[i]=Integer.parseInt(dimensionsString[i]);
+                }
+                totalSurfaceArea += wrappingSurfaceArea(dimensions);
+            }
+            System.out.println(totalSurfaceArea);
+        }catch(Exception e){
+            
+        }
     }
     
-    public static int surfaceArea(int[] d){
+    public static int wrappingSurfaceArea(int[] d){
         
         int l = d[0], w = d[1], h = d[2];
         int SA = 2*((l*w)+(w*h)+(h*l));
