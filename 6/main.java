@@ -63,7 +63,7 @@ class main{
         
         if(operation==0){//toggle
             for (int i = box[0]; i <= box [2]; i++){
-                for (int j = box[1]; j<= box[3]; j++){
+                for (int j = box[1]; j <= box[3]; j++){
                     lights[i][j] = !(lights[i][j]);
                 }
             }
